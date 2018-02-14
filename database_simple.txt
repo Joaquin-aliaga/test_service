@@ -1,0 +1,31 @@
+//Codigo para crear base de datos simple y tabla de usuarios en MariaDB
+//primero es necesario loguear en mysql
+
+//crear database
+CREATE DATABASE users;
+
+//seleccionar database
+use users;
+
+//Crear tabla
+CREATE TABLE usuarios
+(
+	id_usuario INT(4) AUTO_INCREMENT PRIMARY KEY COMMENT 'identificador del usuario con autoincremento',
+	nombre VARCHAR(10) NOT NULL COMMENT 'Nombre del usuario',
+	apellido VARCHAR(10) NOT NULL COMMENT 'Apellido del usuario',
+	numero_telefono INT(9) UNIQUE KEY NOT NULL COMMENT 'numero de telefono'	
+);
+
+//Agregar datos
+INSERT usuarios
+VALUES
+(null, 'jose','perez','756392876'),
+(null, 'maria','debian','190253462'),
+(null, 'martin','carcamo','712062487'),
+(null,'juan','arrieta','172540574');
+
+INSERT usuarios
+VALUES
+(103, 'fake','fake','123456789'),
+(104, 'fake','fake','987654321')
+

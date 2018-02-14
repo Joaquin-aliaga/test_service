@@ -1,0 +1,5 @@
+# Archivo para instalar dependencias
+MySQL-python==1.2.5
+numpy==1.13.3
+requests
+pytest==3.4.0

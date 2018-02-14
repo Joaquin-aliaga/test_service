@@ -1,0 +1,24 @@
+
+stages:
+    - deploy
+    - triggers
+
+docker:
+    stage: deploy
+    image: docker:latest
+    environment: docker registry
+    script:
+        - echo "testing docker in docker"
+        - docker build -t registry:5000/test_service_${CI_COMMIT_REF_NAME}:v1.0 -f ./docker/deploy/Dockerfile .
+        - docker push registry:5000/test_service_${CI_COMMIT_REF_NAME}:v1.0
+        - docker info
+
+notifications:
+    stage: triggers
+    image: docker:stable-dind
+    script:
+        - echo "notifying...."
+        - apk --no-cache add curl
+        - "curl -X POST -F token=15e938aeb7bb5430956f7e06c25615 -F ref=develop http://gitserver/api/v4/projects/561/trigger/pipeline"
+    only:
+        - develop
